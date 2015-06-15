@@ -15,10 +15,10 @@ and open the template in the editor.
     <body>
         <div class="container well" id="contenedorLogin" >
             <form class="form-horizontal">
-                <div class="container">
-                    <img src="Images/profileImage_origin.png" id="imagenLogin" alt="" class="img-circle"/>
+                <div class="form-group" id="figura">
+                    <img src="http://static.freepik.com/foto-gratis/vector-de-usuario-avatar-icono_279-10313.jpg" id="imagenLogin" alt="" class="img-circle"/>
                 </div>
-              <div class="form-group">
+                <div class="form-group">
                 <label for="usuario" class="col-sm-4 contro-label">Usuario</label>
                 <div class="col-sm-8">
                   <div class="input-group">
@@ -54,5 +54,12 @@ and open the template in the editor.
         </div>
         <script src="bootstrap-3.3.4-dist/js/jquery-1.11.3.min.js" type="text/javascript"></script>
         <script src="bootstrap-3.3.4-dist/js/bootstrap.js" type="text/javascript"></script>
+        <script>
+          function load() {
+            $("#contenedorLogin").css('animation-name','volar');
+          }
+          window.onload = load;
+        </script>
+    
     </body>
 </html>
