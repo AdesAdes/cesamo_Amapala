@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/opt/lampp/htdocs/cesamo/pages-modules/navbar.php</file>
-            <file>file:/opt/lampp/htdocs/cesamo/login/login.php</file>
-            <file>file:/opt/lampp/htdocs/cesamo/pages-modules/home.php</file>
-            <file>file:/opt/lampp/htdocs/cesamo/index.php</file>
+            <file>file:/opt/lampp/htdocs/cesamo/pages-modules/reception/menuOptions.php</file>
             <file>file:/opt/lampp/htdocs/cesamo/pages-modules/head.php</file>
-            <file>file:/opt/lampp/htdocs/cesamo/login/validateLogin.php</file>
-            <file>file:/opt/lampp/htdocs/cesamo/css/style.css</file>
+            <file>file:/opt/lampp/htdocs/cesamo/pages-modules/reception/principal.php</file>
+            <file>file:/opt/lampp/htdocs/cesamo/pages-modules/user/principal.php</file>
         </group>
     </open-files>
 </project-private>

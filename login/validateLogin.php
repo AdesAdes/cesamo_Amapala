@@ -3,9 +3,8 @@
     Ingeniería del software
 -->
 <?php
-    if(!isset($_SESSION)) 
-	{ 
-	  session_start(); 
+    if(!isset($_SESSION)) { 
+        session_start(); 
 	}
     include '../conection/conection.php';
     $user = $_POST['username'];

@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<!--
+Ingeniería del software
+-->
 <?php
     if(isset($_GET['content'])){
         $content = $_GET['content'];
@@ -14,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="featurette">
-                    <img class="featurette-image  pull-left" src="images/background-form-login.png">
+                    <img class="featurette-image  pull-left" src="images/background-form-login.png" id="login">
                 </div>
             </div>
         </div>

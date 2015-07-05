@@ -1,5 +1,8 @@
+<!DOCTYPE html>
+<!--
+Ingeniería del software
+-->
 <?php
-
 if(!isset($_SESSION['time_out']))
   {
     $_SESSION['time_out'] = time();

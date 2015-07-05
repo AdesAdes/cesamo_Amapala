@@ -1,6 +1,8 @@
-<?php 
-//definine esta variable temporal para tener un rol cuon el cual trabajar 
-  $rol = 100;
+<!DOCTYPE html>
+<!--
+Ingeniería del software
+-->
+<?php
 ?>
 <div class="navbar navbar-default" id="subnav">
     <div class="col-md-12">
@@ -11,7 +13,7 @@
                     // --------------------------------------------------------------
                     if($content == 'home'){
                         echo <<<HTML
-                            <li  class="active"><a role='button' id="home" >Inicio</a></li>
+                        <li  class="active"><a role='button' id="home" >Inicio</a></li>
 HTML;
                     }
                     else{
@@ -20,78 +22,51 @@ HTML;
                             <li><a role='button' id="home" >Inicio</a></li>
 HTML;
                     }
-                    // ----------------------------------------------------------------
-                    // pagina del neonatos
-                    if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
-                        if($content == 'neonatos'){       
+                    // --------------------------------------------------------------
+                    // pagina del - de la recepcionista
+                    if($rol == 2){
+                        if($content == 'reception'){       
                             echo <<<HTML
-                                <li class="active"><a id="neonatos">Neonatos</a></li>
+                                <li class="active"><a id="reception">Recepción</a></li>
 HTML;
                         }
                         else{
                             echo <<<HTML
-                                <li><a role="button" id="neonatos">Neonatos</a></li>
+                                <li><a role="button" id="reception">Recepción</a></li>
 HTML;
                         }
                     }
-    // ----------------------------------------------------------------
-             
-    // pagina de Reportes
-    if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
-      if($content == 'reportes') 
-      {
-        // switch($rol){   
-        //   case 100: 
-        //     $url = 'pages/Reportes/principal_reportes.php?contenido=reportes';
-        //     break;
-        // }
-          echo <<<HTML
-          <li class="active"><a role="button" id="reportes">Reportes</a></li>
+                    // --------------------------------------------------------------  
+                    // página del médico
+                    if($rol == 3){
+                        if($content == 'medical') {
+                            echo <<<HTML
+                                <li class="active"><a role="button" id="medical">Médico</a></li>
 HTML;
-      }
-      else{
-        echo <<<HTML
-        <li><a role="button" id="reportes">Reportes</a></li>
+                        }
+                        else{
+                            echo <<<HTML
+                                <li><a role="button" id="medical">Médico</a></li>
 HTML;
-      }
-    }
-
-    // ----------------------------------------------------------------------
-    if($rol == 100){
-    // pagina del programa kanguro
-      if($content == 'kanguro'){
-        echo <<<HTML
-        <li class="active"><a role="button" id="pkanguro">Programa Kanguro</a></li>
-
+                        }
+                    }
+                    // --------------------------------------------------------------
+                    // página del programa kanguro
+                    if($rol == 1){
+                        if($content == 'admin'){
+                            echo <<<HTML
+                                <li class="active"><a role="button" id="adminnv">Administración</a></li>
 HTML;
-      }
-      else{
-          $url = 'pages/Programa_Kanguro/principal_kanguro.php?contenido=kanguro';
-          echo <<<HTML
-                <li><a role="button" id="pkanguro">Programa Kanguro</a></li>
+                        }
+                        else{
+                            $url = 'pages-modules/administration/principal.php?content=admin';
+                            echo <<<HTML
+                                <li><a role="button" id="adminnv">Administración</a></li>
 HTML;
-      }
-    } 
-    // --------------------------------------------------------------------------
-
-    if($rol >= 40){
-     // pagina del modulo de gestion de folios
-      if($content == 'inventario') {
-        $url = 'pages/Inventario/principal_inventario.php?contenido=inventario';
-        echo <<<HTML
-        <li class="active"><a role="button" id="Inventario" >Inventario</a></li>
-HTML;
-      }
-      else{
-        $url = 'pages/Inventario/principal_inventario.php?contenido=inventario';
-        echo <<<HTML
-        <li><a role='button' id="Inventario"  >Inventario</a></li>
-HTML;
-        }
-    }
-    //---------------------------------------------------------------------------- 
-?>
-
+                        }
+                    } 
+                    // --------------------------------------------------------------
+                ?>
            </ul>
         </div>  
      </div> 

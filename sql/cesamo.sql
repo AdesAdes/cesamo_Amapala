@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-07-2015 a las 00:19:07
+-- Tiempo de generación: 06-07-2015 a las 00:12:53
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.8
 
@@ -24,18 +24,38 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `am`()
-SELECT 
-	* 
-FROM 
-	inventario$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCodigo`(IN `cod` VARCHAR(4))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertBinnacle`(IN `actionSession` VARCHAR(50), IN `codEmpleadoSession` VARCHAR(4), IN `dateActionSession` DATETIME, IN `ipMachineSession` VARCHAR(40))
     MODIFIES SQL DATA
     SQL SECURITY INVOKER
-INSERT INTO prueba(codigo) VALUES (cod)$$
+    COMMENT 'This procedure have as function register all actions produced'
+INSERT INTO binnacle (action, codEmpleado, dateAction, ipMachine) VALUES (actionSession, codEmpleadoSession, dateAction, ipMachineSession)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllUser`(IN `userSession` VARCHAR(30), IN `passwordSession` VARCHAR(8))
+    READS SQL DATA
+    SQL SECURITY INVOKER
+SELECT * FROM usuarios WHERE username = userSession AND password = passwordSession$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateLog`(IN `logSession` INT, IN `codEmpleadoSession` VARCHAR(4))
+    MODIFIES SQL DATA
+    SQL SECURITY INVOKER
+    COMMENT 'This method change the log of the session of the user'
+UPDATE `usuarios` SET `log`= logSession WHERE `codEmpleado`= codEmpleadoSession$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `binnacle`
+--
+
+CREATE TABLE IF NOT EXISTS `binnacle` (
+  `codBinnacle` int(11) NOT NULL,
+  `action` varchar(50) NOT NULL,
+  `codEmpleado` varchar(4) NOT NULL,
+  `dateAction` datetime NOT NULL,
+  `ipMachine` varchar(40) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -119,7 +139,9 @@ CREATE TABLE IF NOT EXISTS `empleados` (
 --
 
 INSERT INTO `empleados` (`CodEmpleado`, `NumIdentidad`, `P_Nombre`, `S_Nombre`, `P_Apellido`, `S_Apellido`, `Telefono`, `CorreoElectronico`, `FechaNacimiento`, `Sexo`, `Direccion`, `Cargo`) VALUES
-('adf2', '0601199301279', 'Alex', 'Dario', 'Flores', 'Aplicano', 32436703, 'alex_dario92@hotmail.com', '1992-09-21 00:00:00', 'M', 'Choluteca', 'Administrador');
+('adf2', '0601199301279', 'Alex', 'Dario', 'Flores', 'Aplicano', 32436703, 'alex_dario92@hotmail.com', '1992-09-21 00:00:00', 'M', 'Choluteca', 'Administrador'),
+('dag2', '0801199219039', 'Douglas', 'Alberto', 'Guillen', NULL, 98566454, 'douglas_guillen@hotmail.com', '1992-11-28 00:00:00', 'M', 'La joya', 'Doctor'),
+('efd2', '0921199332455', 'Edwin', NULL, 'Paz', NULL, NULL, NULL, '1992-07-22 00:00:00', 'M', 'Las uvas', 'Enfermero');
 
 -- --------------------------------------------------------
 
@@ -253,14 +275,16 @@ CREATE TABLE IF NOT EXISTS `receta_medica` (
 CREATE TABLE IF NOT EXISTS `roles` (
   `codRole` int(11) NOT NULL,
   `nombreRole` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `roles`
 --
 
 INSERT INTO `roles` (`codRole`, `nombreRole`) VALUES
-(1, 'ADMINISTRADOR');
+(1, 'ADMINISTRADOR'),
+(3, 'Médico'),
+(2, 'Recepcionista');
 
 -- --------------------------------------------------------
 
@@ -295,21 +319,31 @@ CREATE TABLE IF NOT EXISTS `salidas_medicamentos_inventario` (
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `userName` varchar(30) NOT NULL,
   `password` varchar(8) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int(1) NOT NULL,
   `codRole` int(11) NOT NULL,
-  `codEmpleado` varchar(4) NOT NULL
+  `codEmpleado` varchar(4) NOT NULL,
+  `log` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`userName`, `password`, `status`, `codRole`, `codEmpleado`) VALUES
-('adfaplicano', '1234', 0, 1, 'adf2');
+INSERT INTO `usuarios` (`userName`, `password`, `status`, `codRole`, `codEmpleado`, `log`) VALUES
+('adfaplicano', '1234', 1, 1, 'adf2', 0),
+('dgou', '1234', 1, 3, 'dag2', 0),
+('edwi', '1234', 1, 2, 'efd2', 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `binnacle`
+--
+ALTER TABLE `binnacle`
+  ADD PRIMARY KEY (`codBinnacle`),
+  ADD KEY `codEmpleado_FK_Binnacle` (`codEmpleado`);
 
 --
 -- Indices de la tabla `carnet_de_vacunacion`
@@ -444,6 +478,11 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `binnacle`
+--
+ALTER TABLE `binnacle`
+  MODIFY `codBinnacle` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT de la tabla `carnet_de_vacunacion`
 --
 ALTER TABLE `carnet_de_vacunacion`
@@ -492,7 +531,7 @@ ALTER TABLE `receta_medica`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `codRole` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `codRole` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `salidas_medicamentos`
 --
@@ -501,6 +540,12 @@ ALTER TABLE `salidas_medicamentos`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `binnacle`
+--
+ALTER TABLE `binnacle`
+  ADD CONSTRAINT `codEmpleado_FK_Binnacle` FOREIGN KEY (`codEmpleado`) REFERENCES `empleados` (`CodEmpleado`);
 
 --
 -- Filtros para la tabla `carnet_de_vacunacion`
