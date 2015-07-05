@@ -1,0 +1,35 @@
+#login{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url("../images/background-login.png");
+    background-size: 100% 150%;
+}
+
+.login{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#container-login{
+    max-width: 340px;
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+    -box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+    border-radius: 6%;
+    background-image: url("../images/background-form-login.png");
+    background-size: 100% 150%;
+}
+
+#avatar{
+    width: 96px;
+    height: 96px;
+    margin: 0px auto 10px;
+    display: block;
+    border-radius: 50%;
+}
+
+#logo{
+    height: 5px;
+    width: 5px;
+}
